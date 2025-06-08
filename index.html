@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>S+ Obfuscator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #333;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    button {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #3498db;
+      color: #fff;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #217dbb;
+    }
+    #output {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      background: #f7f7f7;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      min-height: 50px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .creditos {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>S+ Obfuscator</h1>
+    <textarea id="input" placeholder="Digite aqui..."></textarea>
+    <div class="buttons">
+      <button onclick="obfuscar()">Ofuscar</button>
+      <button onclick="desobfuscar()">Desofuscar</button>
+    </div>
+    <div id="output"></div>
+    <div class="creditos">
+      Obrigado por usar o S+ Obfuscator (Sw1ft SYnc), (OreOFDev)
+    </div>
+  </div>
+
+  <script>
+    const lista  = "abcdefghijklmnopqrstuvwxyz".split("");
+    const obfuscado = [
+      "!j4k", "a4kb4cx12", "dzxcwe", "kf15c", "ghffa", "lmh", "opfg", "dwadasf1",
+      "asdw1", "wdasx", "sdgu5341", "sxz", "f5qsd", "f4", "al453t", "fdsadas4",
+      "afasf2", "12f", "ij5", "kfaslffaad24", "1fsa23mn", "fsa35no", "pfdsfq",
+      "rfafss", "tfaasf24fu", "vasaf1w"
+    ];
+
+    function obfuscar() {
+      const texto = document.getElementById("input").value;
+      let resultado = "";
+      for (let ch of texto) {
+        let min = ch.toLowerCase();
+        if (lista.includes(min)) {
+          let idx = lista.indexOf(min);
+          resultado += obfuscado[idx];
+        } else {
+          resultado += ch;
+        }
+      }
+      document.getElementById("output").textContent = resultado;
+    }
+
+    function desobfuscar() {
+      const texto = document.getElementById("input").value;
+      let resultado = "";
+      let i = 0;
+      while (i < texto.length) {
+        let bloco = texto.substring(i, i + 2);
+        if (obfuscado.includes(bloco)) {
+          let idx = obfuscado.indexOf(bloco);
+          resultado += lista[idx];
+          i += 2;
+        } else {
+          resultado += texto[i];
+          i += 1;
+        }
+      }
+      document.getElementById("output").textContent = resultado;
+    }
+  </script>
+</body>
+</html>
